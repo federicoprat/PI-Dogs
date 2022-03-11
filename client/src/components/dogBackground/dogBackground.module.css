@@ -1,0 +1,9 @@
+
+
+.dog {
+    background: url(dogBackground.png);
+    width: 700px;
+    height: 558px;
+    grid-row: 1/2;
+    grid-column: 2/3;
+  }

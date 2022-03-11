@@ -1,0 +1,27 @@
+
+.container {
+    width: 35vw;
+    min-width: 400px;
+    height: 100px;
+    position: absolute;
+    left: 0;
+    background-color: rgb(214, 214, 214);
+    margin-left: 40px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    
+}
+
+.input {
+    border-bottom: 2px solid red;
+    width: 400px;
+    height: 35px;
+    border: 2px solid rgb(180, 180, 180);
+    background-color: rgb(235, 235, 235);
+    border-radius: 5px;
+    margin-right: 35px;
+    font-size: 2rem;
+    outline: none;
+}

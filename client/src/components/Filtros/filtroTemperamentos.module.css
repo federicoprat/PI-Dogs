@@ -1,0 +1,10 @@
+.select {
+    width: 150px;
+}
+
+.option {
+    width: 150px;
+    font-size: 1rem;
+    color: white;
+    z-index: 10000;
+}

@@ -1,0 +1,11 @@
+
+.boton {
+    height: 30px;
+    width: 70px;
+    padding: 20px;
+    color: rgb(131, 131, 131);
+    transition: 0.1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
