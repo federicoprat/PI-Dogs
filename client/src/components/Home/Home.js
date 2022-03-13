@@ -17,15 +17,14 @@ import DogBackground from "../dogBackground/dogBackground";
 const Home = () => {
   const dispatch = useDispatch();
   const dogs = useSelector(({ dogs }) => dogs.dogs); // todos los perros
-  const page = useSelector(({dogs}) => dogs.page);
+  const page = useSelector(({ dogs }) => dogs.page);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [selectedTemperament, setSelectedTemperament] = useState("None");
   const [state, setState] = useState("todos");
   const [search, setSearch] = useState("");
-  const [ascOrDesc, setAscOrDesc] = useState("desc")
-  const [orderBy, setOrderBy] = useState("id")
-
+  const [ascOrDesc, setAscOrDesc] = useState("asc");
+  const [orderBy, setOrderBy] = useState("name");
 
   function handleTemperamentChange(temperament) {
     setSelectedTemperament(temperament);
@@ -33,23 +32,6 @@ const Home = () => {
 
   function handleChange(option) {
     setState(option);
-  }
-
-  const dogOrdenado = [...dogs];
-  function ordenadora(ascOrDesc, orderBy) {
-    dogOrdenado.sort((a, b) => {
-      let nombreA = a[orderBy],
-        nombreB = b[orderBy];
-      if (ascOrDesc === "asc") {
-        if (nombreA < nombreB) return -1;
-        if (nombreB < nombreA) return 1;
-        return 0;
-      } else if (ascOrDesc === "desc") {
-        if (nombreA > nombreB) return -1;
-        if (nombreB > nombreA) return 1;
-        return 0;
-      }
-    });
   }
 
   useEffect(() => {
@@ -63,7 +45,7 @@ const Home = () => {
     } catch (error) {
       setError(true);
     }
-  }, [dispatch, selectedTemperament, state, search]);
+  }, [dispatch, selectedTemperament, state, search, orderBy, ascOrDesc]);
 
   return (
     <div className={styles.background}>
@@ -102,7 +84,8 @@ const Home = () => {
                   {
                     id,
                     temperament,
-                    weight,
+                    weightMin,
+                    weightMax,
                     image = "http://localhost:3001/dogimage?name=notFound",
                     name,
                   },
@@ -118,7 +101,7 @@ const Home = () => {
                             ? image
                             : `https://cdn2.thedogapi.com/images/${image}.jpg`
                         }
-                        weight={weight}
+                        weight={`${weightMin} - ${weightMax}`}
                         temperament={temperament}
                         id={id}
                       />

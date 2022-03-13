@@ -1,9 +1,9 @@
+const { alfabeticamente } = require("../../../client/src/components/Utilidades/alfabeticamente");
 const { getAllDogs } = require("../controllers/getAllDogs");
 const { conn } = require("../db");
-const { Sequelize } = require("sequelize");
 
 exports.dogsHome = async (req, res) => {
-  const { name } = req.query;
+  const { name, ascOrDesc, orderBy } = req.query;
   try {
     const info = await getAllDogs(name);
     const infoNecesaria = info.map((elemento) => {
@@ -12,14 +12,16 @@ exports.dogsHome = async (req, res) => {
       return {
         name,
         image: image ? image.url : elemento.reference_image_id,
-        weight: weight.metric,
-        temperament,
+        weightMin: Number(weight.metric.split(' - ')[0]) || 0,
+        weightMax: Number(weight.metric.split(' - ')[1]) || 0,  
+        temperament: temperament || 'No Data',
         height: height.metric,
-        lifeSpan: life_span,
+        lifeSpan: life_span || 'No Data',
         id,
         created:false
       };
     });
+
     const { Dog, Temperament } = conn.models;
     const infoDB = await Dog.findAll({
       include: [
@@ -29,23 +31,35 @@ exports.dogsHome = async (req, res) => {
         },
       ],
     });// array con los perros de la DB
-
-    const infoDBFormateada = infoDB.map(({dbID, name, height, weight, lifeSpan, Temperaments, image, created}) => {
+    const infoDBFormateada = infoDB.map(({dbID, name, height, weightMin, weightMax, lifeSpan, Temperaments, image, created}) => {
       const temperamentsString = Temperaments.map(element => element.name)
       return {
         id: dbID,
         name,
         height,
-        weight,
+        weightMin,
+        weightMax,
         lifeSpan,
         temperament: temperamentsString.toString().replace(',', ', '),
         image: `http://localhost:3001/dogimage?name=${image}`,
         created
       }
     })
+
     const infoTotal = [...infoNecesaria, ...infoDBFormateada]; // ambos arrays juntos en un solo array
+
+    let infoFiltrada;
+    if (orderBy === 'name') {
+      infoFiltrada = alfabeticamente(infoTotal, ascOrDesc)
+    }
+    else if (orderBy === 'weight') {
+      if (ascOrDesc === 'asc')
+      infoFiltrada = infoTotal.sort(function (a, b) {return (a.weightMin + a.weightMax) - (b.weightMin + b.weightMax)})
+      else if (ascOrDesc === 'desc')
+      infoFiltrada = infoTotal.sort(function(a, b) {return (b.weightMin + b.weightMax) - (a.weightMin + a.weightMax)})
+    }
     res.json(infoTotal);
   } catch (error) {
-    res.status(500).send("algo salio mal", error);
+    res.status(500).send(error);
   }
 };

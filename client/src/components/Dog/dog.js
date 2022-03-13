@@ -9,7 +9,7 @@ import Spinner from "../Spinner/spinner";
 import Header from "../header/header";
 import DogBackground from "../dogBackground/dogBackground";
 
-const Dog = ({ search, setSearch }) => {
+const Dog = () => {
   const id = useParams();
   const dog = useSelector(({ dog }) => dog.dog);
   const dispatch = useDispatch();

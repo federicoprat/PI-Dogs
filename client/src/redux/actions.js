@@ -5,15 +5,16 @@ export const ACTIONS = {
   DOG_BY_ID: "dogById",
 };
 
-export function addRaces(filter, origen, search = undefined) {
+export function addRaces(filter, origen, search = undefined, orderBy, ascOrDesc) {
   return async function (dispatch) {
     let json;
     if (!search) {
-      json = await fetch("http://localhost:3001/dogs");
+      json = await fetch(`http://localhost:3001/dogs?orderBy=${orderBy}&ascOrDesc=${ascOrDesc}`);
     } else {
-      json = await fetch(`http://localhost:3001/dogs?name=${search}`);
+      json = await fetch(`http://localhost:3001/dogs?name=${search}&orderBy=${orderBy}&ascOrDesc=${ascOrDesc}`);
     }
     const data = await json.json();
+    console.log(data)
     if (filter === "None") {
       if (origen === "todos")
         dispatch({
