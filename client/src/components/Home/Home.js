@@ -13,11 +13,14 @@ import FiltroTemperamento from "../Filtros/filtroTemperamentos";
 import FiltroCreados from "../Filtros/filtroCreados";
 import Header from "../header/header";
 import DogBackground from "../dogBackground/dogBackground";
+import FiltroNombreOPeso from "../Filtros/filtroNombrePeso";
+import FiltroAscOrDesc from "../Filtros/filtroAscOrDesc";
 
 const Home = () => {
   const dispatch = useDispatch();
   const dogs = useSelector(({ dogs }) => dogs.dogs); // todos los perros
   const page = useSelector(({ dogs }) => dogs.page);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [selectedTemperament, setSelectedTemperament] = useState("None");
@@ -34,6 +37,14 @@ const Home = () => {
     setState(option);
   }
 
+  function handleNameOrWeight(option) {
+    setOrderBy(option);
+  }
+
+  function handleAscOrDesc(option) {
+    setAscOrDesc(option)
+  }
+
   useEffect(() => {
     try {
       setError(false);
@@ -41,7 +52,9 @@ const Home = () => {
       Store.subscribe(() => {
         setLoading(false);
       });
-      dispatch(addRaces(selectedTemperament, state, search, orderBy, ascOrDesc));
+      dispatch(
+        addRaces(selectedTemperament, state, search, orderBy, ascOrDesc)
+      );
     } catch (error) {
       setError(true);
     }
@@ -63,6 +76,8 @@ const Home = () => {
             selectedTemperament={selectedTemperament}
           />
           <FiltroCreados state={state} handleChange={handleChange} />
+          <FiltroNombreOPeso handleNameOrWeight={handleNameOrWeight} orderBy={orderBy} />
+          <FiltroAscOrDesc ascOrDesc={ascOrDesc} handleAscOrDesc={handleAscOrDesc} />
         </Filtros>
       </div>
       <div className={styles.fotosContainer}>

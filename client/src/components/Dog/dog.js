@@ -40,7 +40,7 @@ const Dog = () => {
               ({ name, image, height, weight, temperament, life_span }) => {
                 return (
                   <div key={name} className={styles.dog}>
-                    <img src={image} className={styles.img} />
+                    <img src={image} className={styles.img} alt={name} />
                     <div className={styles.containerDatos} >
                       <div>Altura: {height} cm</div>
                       <div>Peso: {weight} Kg</div>
