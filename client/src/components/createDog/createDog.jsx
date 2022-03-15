@@ -130,7 +130,7 @@ const CreateDog = () => {
       form.alturaMin &&
       form.alturaMax &&
       form.lifeSpan &&
-      form.name
+      form.name && temperamentosData.length
     ) {
       try {
         const postRequest = await fetch("http://localhost:3001/dog", {
@@ -269,7 +269,7 @@ const CreateDog = () => {
             {form.lifeSpan ? errors.lifeSpan : "campo requerido"}
           </p>
         </div>
-        <button onClick={(e) => handlePopUp(e)} >Desplegar temperamentos</button>
+        <button className={styles.botonTemperamentos} onClick={(e) => handlePopUp(e)} >Desplegar temperamentos</button>
         <input className={styles.boton} type="submit" name="boton" />
       </form>
     </div>
