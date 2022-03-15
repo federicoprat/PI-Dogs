@@ -28,7 +28,7 @@ exports.dogsHome = async (req, res) => {
     let infoDB;
     const { Dog, Temperament } = conn.models;
     if (name) {
-       infoDB = await Dog.findAll({
+      infoDB = await Dog.findAll({
         where: { name: name[0].toUpperCase() + name.slice(1).toLowerCase() },
         include: [
           {
@@ -38,7 +38,7 @@ exports.dogsHome = async (req, res) => {
         ],
       }); // array con los perros de la DB
     } else {
-       infoDB = await Dog.findAll({
+      infoDB = await Dog.findAll({
         include: [
           {
             model: Temperament,
@@ -59,9 +59,7 @@ exports.dogsHome = async (req, res) => {
         image,
         created,
       }) => {
-        const temperamentsString = Temperaments.map(
-          (element) => element.name
-        );
+        const temperamentsString = Temperaments.map((element) => element.name);
         return {
           id: dbID,
           name,

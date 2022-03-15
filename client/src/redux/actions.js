@@ -54,13 +54,20 @@ export function addRaces(
           type: ACTIONS.ADD_RACES,
           payload: {
             data: data.filter(({ temperament }) => {
-              if (temperament) return temperament.split(", ").includes(filter);
+              if (temperament)
+                return temperament
+                  .split(",")
+                  .map((i) => i.trim())
+                  .includes(filter);
               else return null;
             }),
             pages: Math.ceil(
               data.filter(({ temperament }) => {
                 if (temperament)
-                  return temperament.split(", ").includes(filter);
+                  return temperament
+                    .split(",")
+                    .map((i) => i.trim())
+                    .includes(filter);
                 else return null;
               }).length / 8
             ),
@@ -72,13 +79,13 @@ export function addRaces(
           payload: {
             data: data.filter(({ temperament, created }) => {
               if (temperament)
-                return temperament.split(", ").includes(filter) && created;
+                return temperament.split(",").includes(filter) && created;
               else return null;
             }),
             pages: Math.ceil(
               data.filter(({ temperament, created }) => {
                 if (temperament)
-                  return temperament.split(", ").includes(filter) && created;
+                  return temperament.split(",").includes(filter) && created;
                 else return null;
               }).length / 8
             ),
