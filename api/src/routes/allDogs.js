@@ -29,7 +29,7 @@ exports.dogsHome = async (req, res) => {
     const { Dog, Temperament } = conn.models;
     if (name) {
       const infoDB = await Dog.findAll({
-        where: {name: name.toLowerCase()},
+        where: {name: name[0].toUpperCase() + name.slice(1).toLowerCase()},
         include: [
           {
             model: Temperament,
@@ -105,7 +105,7 @@ exports.dogsHome = async (req, res) => {
     }
 
     const infoTotal = [...infoNecesaria, ...infoDBFormateada]; // ambos arrays juntos en un solo array
-
+    
     let infoFiltrada;
     if (orderBy === "name") {
       infoFiltrada = alfabeticamente(infoTotal, ascOrDesc);

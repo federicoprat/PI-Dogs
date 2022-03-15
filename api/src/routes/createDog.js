@@ -24,7 +24,7 @@ exports.createDog = async (req, res) => {
   const { Dog } = conn.models;
   try {
     const dog = await Dog.create({
-      name,
+      name: name[0].toUpperCase() + name.slice(1).toLowerCase(),
       height: `${alturaMin} - ${alturaMax}`,
       weightMin: pesoMin,
       weightMax: pesoMax,

@@ -4,7 +4,7 @@ export const ACTIONS = {
   PREVIOUS_PAGE: "previousPage",
   DOG_BY_ID: "dogById",
   GO_TO_PAGE: "goToPage",
-  ADD_TEMPERAMENTS: "addTemperaments"
+  ADD_TEMPERAMENTS: "addTemperaments",
 };
 
 export function addRaces(
@@ -131,12 +131,12 @@ export function goToPage(page) {
 }
 
 export function getTemperaments() {
-  return async function(dispatch){
-    const data = await fetch('http://localhost:3001/temperament')
-    const json = await data.json()
+  return async function (dispatch) {
+    const data = await fetch("http://localhost:3001/temperament");
+    const json = await data.json();
     dispatch({
       type: ACTIONS.ADD_TEMPERAMENTS,
-      payload: json
-    })
-  }
+      payload: json,
+    });
+  };
 }
