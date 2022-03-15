@@ -25,11 +25,11 @@ exports.dogsHome = async (req, res) => {
       };
     });
 
-    let infoDB;
+    let infoDBFormateada;
     const { Dog, Temperament } = conn.models;
     if (name) {
-       infoDB = await Dog.findAll({
-        where: { name: name[0].toUpperCase() + name.slice(1).toLowerCase() },
+      const infoDB = await Dog.findAll({
+        where: {name: name[0].toUpperCase() + name.slice(1).toLowerCase()},
         include: [
           {
             model: Temperament,
@@ -37,47 +37,75 @@ exports.dogsHome = async (req, res) => {
           },
         ],
       }); // array con los perros de la DB
-    } else {
-       infoDB = await Dog.findAll({
-        include: [
-          {
-            model: Temperament,
-            attributes: ["name"],
-          },
-        ],
-      }); // array con los perros de la DB
-    }
-    const infoDBFormateada = infoDB.map(
-      ({
-        dbID,
-        name,
-        height,
-        weightMin,
-        weightMax,
-        lifeSpan,
-        Temperaments,
-        image,
-        created,
-      }) => {
-        const temperamentsString = Temperaments.map(
-          (element) => element.name
-        );
-        return {
-          id: dbID,
+      infoDBFormateada = infoDB.map(
+        ({
+          dbID,
           name,
           height,
           weightMin,
           weightMax,
           lifeSpan,
-          temperament: temperamentsString.toString(),
-          image: `http://localhost:3001/dogimage?name=${image}`,
+          Temperaments,
+          image,
           created,
-        };
-      }
-    );
+        }) => {
+          const temperamentsString = Temperaments.map(
+            (element) => element.name
+          );
+          return {
+            id: dbID,
+            name,
+            height,
+            weightMin,
+            weightMax,
+            lifeSpan,
+            temperament: temperamentsString.toString(),
+            image: `http://localhost:3001/dogimage?name=${image}`,
+            created,
+          };
+        }
+      );
+    } else {
+      const infoDB = await Dog.findAll({
+        include: [
+          {
+            model: Temperament,
+            attributes: ["name"],
+          },
+        ],
+      }); // array con los perros de la DB
+      infoDBFormateada = infoDB.map(
+        ({
+          dbID,
+          name,
+          height,
+          weightMin,
+          weightMax,
+          lifeSpan,
+          Temperaments,
+          image,
+          created,
+        }) => {
+          const temperamentsString = Temperaments.map(
+            (element) => element.name
+          );
+          return {
+            id: dbID,
+            name,
+            height,
+            weightMin,
+            weightMax,
+            lifeSpan,
+            temperament: temperamentsString.toString(),
+            image: `http://localhost:3001/dogimage?name=${image}`,
+            created,
+          };
+        }
+      );
+    }
 
     const infoTotal = [...infoNecesaria, ...infoDBFormateada]; // ambos arrays juntos en un solo array
-
+    
     let infoFiltrada;
     if (orderBy === "name") {
       infoFiltrada = alfabeticamente(infoTotal, ascOrDesc);
