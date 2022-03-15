@@ -183,7 +183,7 @@ const CreateDog = () => {
         </div>
         <div className={styles.pesoMinimo}>
           <input
-            placeholder="Peso minimo"
+            placeholder="Peso minimo (kg)"
             name="pesoMin"
             value={form.pesoMin}
             onChange={(e) => handleChange(e)}
@@ -199,7 +199,7 @@ const CreateDog = () => {
         </div>
         <div className={styles.pesoMaximo}>
           <input
-            placeholder="Peso maximo"
+            placeholder="Peso maximo (kg)"
             name="pesoMax"
             value={form.pesoMax}
             onChange={(e) => handleChange(e)}
@@ -213,9 +213,9 @@ const CreateDog = () => {
             {form.pesoMax ? errors.pesoMax : "campo requerido"}
           </p>
         </div>
-        <div className={styles.alturaMaxima}>
+        <div className={styles.alturaMinima}>
           <input
-            placeholder="Altura minima"
+            placeholder="Altura minima (cm)"
             name="alturaMin"
             value={form.alturaMin}
             onChange={(e) => handleChange(e)}
@@ -231,9 +231,9 @@ const CreateDog = () => {
             {form.alturaMin ? errors.alturaMin : "campo requerido"}
           </p>
         </div>
-        <div className={styles.alturaMinima}>
+        <div className={styles.alturaMaxima}>
           <input
-            placeholder="Altura maxima"
+            placeholder="Altura maxima(cm)"
             name="alturaMax"
             value={form.alturaMax}
             onChange={(e) => handleChange(e)}
@@ -251,7 +251,7 @@ const CreateDog = () => {
         </div>
         <div className={styles.lifeSpan}>
           <input
-            placeholder="Esperanza de vida"
+            placeholder="Esperanza de vida (años)"
             name="lifeSpan"
             value={form.lifeSpan}
             onChange={(e) => handleChange(e)}
