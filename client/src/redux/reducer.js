@@ -4,10 +4,12 @@ const initialState = {
   dogs: {
     dogs: [],
     page: 0,
+    pages: 1
   },
   dog: {
       dog: []
-  }
+  },
+  temperaments: []
 };
 
 const reducer = (state = initialState, { payload, type }) => {
@@ -15,7 +17,7 @@ const reducer = (state = initialState, { payload, type }) => {
     case ACTIONS.ADD_RACES:
       return {
         ...state,
-        dogs: { ...state.dogs, dogs: [...payload], page: 0 },
+        dogs: { ...state.dogs, dogs: [...payload.data], page: 0, pages: payload.pages },
       };
     case ACTIONS.NEXT_PAGE:
       return {
@@ -31,6 +33,16 @@ const reducer = (state = initialState, { payload, type }) => {
       return {
         ...state,
         dog: {...state.dog, dog: [...payload]}
+      }
+    case ACTIONS.GO_TO_PAGE:
+      return {
+        ...state,
+        dogs: {...state.dogs, page: payload}
+      }
+    case ACTIONS.ADD_TEMPERAMENTS:
+      return {
+        ...state,
+        temperaments: payload
       }
     default:
       return state;

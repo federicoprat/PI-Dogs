@@ -19,7 +19,6 @@ exports.createDog = async (req, res) => {
     lifeSpan,
     temperamento,
   } = req.body;
-
   const imagenes = ['imagenMuestra1', 'imagenMuestra2', 'imagenMuestra3']
 
   const { Dog } = conn.models;
@@ -27,7 +26,8 @@ exports.createDog = async (req, res) => {
     const dog = await Dog.create({
       name,
       height: `${alturaMin} - ${alturaMax}`,
-      weight: `${pesoMin} - ${pesoMax}`,
+      weightMin: pesoMin,
+      weightMax: pesoMax,
       lifeSpan,
       image: imagenes[Math.floor(Math.random() * imagenes.length)],
       created: true

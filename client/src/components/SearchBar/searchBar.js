@@ -18,6 +18,7 @@ const SearchBar = ({ setSearch }) => {
   }, [state, setSearch]);
   return (
     <div className={styles.container}>
+      <p >Search </p>
       <input
         value={state}
         onChange={(e) => setState(e.target.value)}

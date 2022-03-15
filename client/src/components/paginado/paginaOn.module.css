@@ -1,0 +1,17 @@
+
+.container {
+    height: 30px;
+    width: 30px;
+    background-color: rgb(255, 255, 255);
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.numero {
+    font-family: Anton;
+    color: rgb(80, 80, 80);
+    font-size: 15px;
+}

@@ -9,6 +9,7 @@ import Spinner from "../Spinner/spinner";
 import Header from "../header/header";
 import DogBackground from "../dogBackground/dogBackground";
 
+
 const Dog = () => {
   const id = useParams();
   const dog = useSelector(({ dog }) => dog.dog);
@@ -16,17 +17,19 @@ const Dog = () => {
   const store = useStore();
   const [loading, setLoading] = useState(false);
 
+
   useEffect(() => {
     try {
       setLoading(true);
       dispatch(getDogById(id));
-      store.subscribe(() => setLoading(false));
+      store.subscribe(() => {
+        setLoading(false)
+      });
     } catch (error) {
       setLoading(false);
       console.log("algo salio mal");
     }
   }, [id, dispatch, store]);
-
   return (
     <div>
       {loading ? (
@@ -36,21 +39,21 @@ const Dog = () => {
           <Header descripcion={dog.map((el) => el.name)} searchbar={false} />
           <DogBackground />
           <div className={styles.container}>
-            {dog.map(
-              ({ name, image, height, weight, temperament, life_span }) => {
+            {dog.length ? dog.map(
+              ({ name, image, height, weight, temperament, lifeSpan }) => {
                 return (
                   <div key={name} className={styles.dog}>
                     <img src={image} className={styles.img} alt={name} />
-                    <div className={styles.containerDatos} >
+                    <div className={styles.containerDatos}>
                       <div>Altura: {height} cm</div>
                       <div>Peso: {weight} Kg</div>
-                      <div>Temperamento: {temperament}</div>
-                      <div>Años de vida: {life_span}</div>
+                      <div>Temperamento: {temperament.toString().replaceAll(',', ', ')}</div>
+                      <div>Años de vida: {lifeSpan}</div>
                     </div>
                   </div>
                 );
               }
-            )}
+            ) : <div style={{fontSize: '50px', color: 'rgb(60, 60, 60)'}}> NO HAY RESULTADOS </div>}
           </div>
         </div>
       )}

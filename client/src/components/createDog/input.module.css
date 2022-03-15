@@ -1,0 +1,17 @@
+input {
+    width: 400px;
+    padding: 8px;
+    border: 2px solid rgb(189, 189, 189);
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: 0.4s;
+    outline: none;
+    font-size: 1.3rem;
+    font-family: Anton;
+    color: black;
+}
+
+input:focus {
+    border-color: rgb(75, 75, 75);
+    box-shadow: 0 0 8px 0 rgb(44, 41, 41);
+}

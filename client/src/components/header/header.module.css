@@ -1,46 +1,64 @@
 .header {
-    height: 15vh;
-    min-height: 100px;
-    width: 100%;
-    min-width: 1200px;
-    background-color: rgb(230, 230, 230);
-    margin-top: 190px;
-    position: absolute;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 50px 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .lineas {
-    height: 11.7vh;
-    width: 100%;
-    min-height: 77px;
-    min-width: 400px;
-    border-top: 3px dotted rgb(203, 203, 203);
-    border-bottom: 3px dotted rgb(203, 203, 203);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: Anton;
-    font-size: 4rem;
-    color: rgb(0, 0, 0);
-  }
+  height: 15vh;
+  min-height: 130px;
+  width: 100%;
+  min-width: 1200px;
+  background-color: rgb(230, 230, 230);
+  margin-top: 190px;
+  position: absolute;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 50px 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .irAtras {
-    position:absolute;
-    left:0;
-    margin-left: 80px;
-    width: 200px;
-    height: 50%;
-    background-color: rgb(136, 136, 136);
-    align-self: center;
-    font-size: 2.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-  }
-  .irAtras:visited {
-    color: black
-  }
+.lineas {
+  height: 11.7vh;
+  width: 100%;
+  min-height: 110px;
+  min-width: 400px;
+  border-top: 3px dotted rgb(203, 203, 203);
+  border-bottom: 3px dotted rgb(203, 203, 203);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Anton;
+  font-size: 4rem;
+  color: rgb(0, 0, 0);
+}
+
+.irAtras {
+  position: absolute;
+  left: 0;
+  margin-left: 80px;
+  width: 200px;
+  height: 50%;
+  background-color: rgb(136, 136, 136);
+  align-self: center;
+  font-size: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+.irAtras:visited {
+  color: black;
+}
+
+.crearPerro {
+  position: absolute;
+  right: 0;
+  margin-right: 200px;
+  width: 200px;
+  height: 50%;
+  background-color: rgb(136, 136, 136);
+  align-self: center;
+  font-size: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+.crearPerro:visited {
+  color: black;
+}

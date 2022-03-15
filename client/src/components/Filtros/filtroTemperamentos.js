@@ -19,6 +19,8 @@ const FiltroTemperamento = ({
   }, []);
 
   return (
+    <>
+    <p className={styles.p}>por temperamento</p>
     <select
       className={styles.select}
       value={selectedTemperament}
@@ -32,6 +34,7 @@ const FiltroTemperamento = ({
         );
       })}
     </select>
+    </>
   );
 };
 

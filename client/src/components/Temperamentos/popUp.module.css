@@ -1,0 +1,41 @@
+.background {
+  width: 900px;
+  height: 900px;
+  background-color: rgb(100, 100, 100);
+  position: absolute;
+  z-index: 1000;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -10%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+
+.boton {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 40px;
+    padding: 10px;
+}
+
+.container{
+    outline: 2px solid rgb(56, 56, 56);
+    background-color: rgb(182, 182, 182);;
+    width: 80%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    font-family: Fredoka;
+    flex-direction: column;
+}
+
+.spanInput {
+    outline: 1px solid red;
+    margin-left: 10px;
+}

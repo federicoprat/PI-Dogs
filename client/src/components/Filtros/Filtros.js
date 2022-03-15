@@ -4,6 +4,7 @@ const Filtros = ({children}) => {
  
   return (
     <div className={styles.container} >
+      <p className={styles.p} >FILTROS:</p>
       {children}
     </div>
   );

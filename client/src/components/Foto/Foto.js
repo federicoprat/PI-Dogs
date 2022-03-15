@@ -9,7 +9,7 @@ const Foto = ({ name, image, temperament, weight, id }) => {
         <Link to={`/dog/${id}`} className={styles.link}>
         <div className={styles.name}>{name}</div>
         </Link>
-        <div className={styles.temperament}>{temperament}</div>
+        <div className={styles.temperament}>{temperament.replaceAll(',', ', ')}</div>
         <div className={styles.weight}>weight(kg): {weight}</div>
       </div>
     </>

@@ -20,12 +20,22 @@ exports.dogById = async (req, res) => {
     });
     const { Dog, Temperament } = conn.models;
     if (id.length === 36) {
-      console.log('entro a if')
       const infoDB = await Dog.findAll({
         where: {dbID: id},
         include: { model: Temperament, attributes: ["name"] },
       });
-      const infoTotal = [...infoNecesaria, ...infoDB]; // ambos arrays juntos en un solo array
+      const infoFormateada = infoDB.map(elemento => {
+        return {
+          name: elemento.name,
+          height: elemento.height,
+          weight: `${elemento.weightMin} - ${elemento.weightMax}`,
+          lifeSpan: elemento.lifeSpan,
+          temperament: elemento.Temperaments.map(elemento => elemento.name),
+          image: `http://localhost:3001/dogimage?name=${elemento.image}`
+          
+        }
+      })
+      const infoTotal = [...infoNecesaria, ...infoFormateada]; // ambos arrays juntos en un solo array
       return res.json(infoTotal);
     }
     const infoTotal = [...infoNecesaria]

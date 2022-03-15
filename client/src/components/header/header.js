@@ -8,6 +8,9 @@ const Header = ({ search, setSearch, descripcion, searchbar }) => {
       <div className={styles.header}>
         <div className={styles.lineas}>
           <SearchBar search={search} setSearch={setSearch} /> {descripcion}
+          <Link to="/createdog" className={styles.crearPerro}>
+            <div >Crear perro</div>
+          </Link>
         </div>
       </div>
     );

@@ -2,6 +2,8 @@ import styles from "./filtroAscOrDesc.module.css";
 
 const FiltroAscOrDesc = ({ascOrDesc, handleAscOrDesc}) => {
   return (
+    <>
+    <p className={styles.p}>Cambiar orden</p>
     <select
       className={styles.select}
       value={ascOrDesc}
@@ -10,6 +12,7 @@ const FiltroAscOrDesc = ({ascOrDesc, handleAscOrDesc}) => {
       <option value={'asc'}>Ascendente</option>
       <option value={'desc'}>Descendente</option>
     </select>
+    </>
   );
 };
 

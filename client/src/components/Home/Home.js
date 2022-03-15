@@ -15,12 +15,13 @@ import Header from "../header/header";
 import DogBackground from "../dogBackground/dogBackground";
 import FiltroNombreOPeso from "../Filtros/filtroNombrePeso";
 import FiltroAscOrDesc from "../Filtros/filtroAscOrDesc";
+import Paginado from "../paginado/paginado";
 
 const Home = () => {
   const dispatch = useDispatch();
   const dogs = useSelector(({ dogs }) => dogs.dogs); // todos los perros
   const page = useSelector(({ dogs }) => dogs.page);
-
+  const pages = useSelector(({dogs}) => dogs.pages);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [selectedTemperament, setSelectedTemperament] = useState("None");
@@ -87,6 +88,9 @@ const Home = () => {
           className="anterior"
           disabled={page <= 0}
         />
+        <div className={styles.paginadoContainer}>
+          {!loading && <Paginado page={page} pages={pages} />}
+        </div>
         {error ? (
           <div>HUBO UN ERROR</div>
         ) : (
@@ -124,11 +128,11 @@ const Home = () => {
                   } else return null;
                 }
               )
-            ) : (
+            ) : search ? (
               <div className={styles.notfound}>
                 NO RESULTS FOR THE SEARCH {`"${search}"`.toUpperCase()}...
               </div>
-            )}
+            ) : <div className={styles.notfound}>NO RESULTS</div>}
           </Fotos>
         )}
         <Boton

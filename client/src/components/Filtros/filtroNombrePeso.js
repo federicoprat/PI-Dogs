@@ -2,6 +2,8 @@ import styles from "./filtroNombrePeso.module.css";
 
 const FiltroNombreOPeso = ({orderBy, handleNameOrWeight}) => {
   return (
+    <>
+    <p className={styles.p}>por nombre o peso</p>
     <select
       className={styles.select}
       value={orderBy}
@@ -10,6 +12,7 @@ const FiltroNombreOPeso = ({orderBy, handleNameOrWeight}) => {
       <option value={'name'}>Nombre</option>
       <option value={'weight'}>Peso</option>
     </select>
+    </>
   );
 };
 
