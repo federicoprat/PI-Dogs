@@ -1,6 +1,6 @@
 import styles from "./createDog.module.css";
 import Header from "../header/header";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import PopUp from "../Temperamentos/popUp";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,69 +34,15 @@ const CreateDog = () => {
     new Array(124).fill(false)
   );
 
-  useEffect(() => {
-    dispatch(getTemperaments());
-  }, [dispatch]);
-
-  useEffect(() => {
-    console.log(checked);
-  }, checked);
-
-  useEffect(() => {
-    if (!inicio) {
-      return (inicio.current = false);
-    }
-    validateNumber("pesoMin");
-  }, [form.pesoMin]);
-
-  useEffect(() => {
-    if (!inicio) {
-      return (inicio.current = false);
-    }
-    validateNumber("pesoMax");
-  }, [form.pesoMax]);
-
-  useEffect(() => {
-    if (!inicio) {
-      return (inicio.current = false);
-    }
-    validateNumber("alturaMin");
-  }, [form.alturaMin]);
-
-  useEffect(() => {
-    if (!inicio) {
-      return (inicio.current = false);
-    }
-    validateNumber("alturaMax");
-  }, [form.alturaMax]);
-  useEffect(() => {
-    if (!inicio) {
-      return (inicio.current = false);
-    }
-    validateNumber("lifeSpan");
-  }, [form.lifeSpan]);
-
-  useEffect(() => {
-    if (!inicio) {
-      return (inicio.current = false);
-    }
-    validateName();
-  }, [form.name]);
-
-  function handleChange(e) {
-    e.preventDefault();
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  }
-
-  function validateNumber(name) {
+  const validateNumber = useCallback((name) => {
     if (!/^[0-9]*$/.test(form[name])) {
       setErrors((prev) => ({ ...prev, [name]: "Solo se permiten numeros" }));
     } else {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
-  }
+  }, [form])
 
-  function validateName() {
+  const validateName = useCallback(() => {
     if (!/^[A-Za-z]+$/.test(form.name)) {
       setErrors((prev) => ({
         ...prev,
@@ -105,7 +51,59 @@ const CreateDog = () => {
     } else {
       setErrors((prev) => ({ ...prev, name: "" }));
     }
+  }, [form.name])
+
+
+  useEffect(() => {
+    dispatch(getTemperaments());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!inicio) {
+      return (inicio.current = false);
+    }
+    validateNumber("pesoMin");
+  }, [form.pesoMin, validateNumber]);
+
+  useEffect(() => {
+    if (!inicio) {
+      return (inicio.current = false);
+    }
+    validateNumber("pesoMax");
+  }, [form.pesoMax, validateNumber]);
+
+  useEffect(() => {
+    if (!inicio) {
+      return (inicio.current = false);
+    }
+    validateNumber("alturaMin");
+  }, [form.alturaMin, validateNumber]);
+
+  useEffect(() => {
+    if (!inicio) {
+      return (inicio.current = false);
+    }
+    validateNumber("alturaMax");
+  }, [form.alturaMax, validateNumber]);
+  useEffect(() => {
+    if (!inicio) {
+      return (inicio.current = false);
+    }
+    validateNumber("lifeSpan");
+  }, [form.lifeSpan, validateNumber]);
+
+  useEffect(() => {
+    if (!inicio) {
+      return (inicio.current = false);
+    }
+    validateName();
+  }, [form.name, validateName]);
+
+  function handleChange(e) {
+    e.preventDefault();
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
+
   function handlePopUp (e) {
     e.preventDefault()
     setPopUp(true)
@@ -115,9 +113,9 @@ const CreateDog = () => {
     e.preventDefault();
     const temperamentosData = []
     checked.map((elemento, index) => {
-      if (elemento) temperamentosData.push(index+1)
+      if (elemento) return temperamentosData.push(index+1)
+      else return null
     })
-    console.log({temperamentosData})
     if (
       !errors.pesoMin &&
       !errors.pesoMax &&
@@ -150,10 +148,8 @@ const CreateDog = () => {
         });
         if (postRequest.status === 200) {
           navigate("/success")
-          console.log(postRequest)
         }
         else if (postRequest.status === 500) {
-          console.log(postRequest)
           alert("algo salio mal")
         }
       } catch (error) {
