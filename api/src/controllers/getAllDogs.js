@@ -1,6 +1,9 @@
 const { CONFIG } = require("./configuration");
 const axios = require("axios");
-const API_KEY = "146e850c-31e1-4a41-9f72-38fd5433bc57";
+require('dotenv').config();
+
+let API_KEY = process.env.API_KEY;
+
 
 exports.getAllDogs = async (search = "") => {
   try {

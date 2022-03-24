@@ -29,7 +29,7 @@ exports.dogById = async (req, res) => {
           name: elemento.name,
           height: elemento.height,
           weight: `${elemento.weightMin} - ${elemento.weightMax}`,
-          lifeSpan: elemento.lifeSpan,
+          life_span: elemento.lifeSpan,
           temperament: elemento.Temperaments.map(elemento => elemento.name),
           image: `http://localhost:3001/dogimage?name=${elemento.image}`
           

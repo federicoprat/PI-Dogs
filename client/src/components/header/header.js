@@ -9,7 +9,7 @@ const Header = ({ search, setSearch, descripcion, searchbar }) => {
         <div className={styles.lineas}>
           <SearchBar search={search} setSearch={setSearch} /> {descripcion}
           <Link to="/createdog" className={styles.crearPerro}>
-            <div >Crear perro</div>
+            <div >Create a dog</div>
           </Link>
         </div>
       </div>
@@ -19,7 +19,7 @@ const Header = ({ search, setSearch, descripcion, searchbar }) => {
       <div className={styles.header}>
         <div className={styles.lineas}>
           <Link to="/home" className={styles.irAtras}>
-            <div >IR ATRAS</div>
+            <div >GO BACK</div>
           </Link>
           {descripcion}
         </div>

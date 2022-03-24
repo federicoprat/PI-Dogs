@@ -128,7 +128,8 @@ const CreateDog = () => {
       form.alturaMin &&
       form.alturaMax &&
       form.lifeSpan &&
-      form.name && temperamentosData.length
+      form.name && temperamentosData.length <= 3
+      && temperamentosData.length > 0
     ) {
       try {
         const postRequest = await fetch("http://localhost:3001/dog", {
@@ -150,13 +151,13 @@ const CreateDog = () => {
           navigate("/success")
         }
         else if (postRequest.status === 500) {
-          alert("algo salio mal")
+          alert("something went wrong..")
         }
       } catch (error) {
         console.log(error);
       }
     } else {
-      alert("hay campos con errores");
+      alert("There are fields with errors");
     }
   }
 
@@ -178,12 +179,12 @@ const CreateDog = () => {
             }}
           />
           <p className={styles.errorName}>
-            {form.name ? errors.name : "campo requerido"}
+            {form.name ? errors.name : "required field"}
           </p>
         </div>
         <div className={styles.pesoMinimo}>
           <input
-            placeholder="Peso minimo (kg)"
+            placeholder="Min weight (kg)"
             name="pesoMin"
             value={form.pesoMin}
             onChange={(e) => handleChange(e)}
@@ -194,12 +195,12 @@ const CreateDog = () => {
             }}
           />
           <p className={styles.errorPesoMin}>
-            {form.pesoMin ? errors.pesoMin : "campo requerido"}
+            {form.pesoMin ? errors.pesoMin : "required field"}
           </p>
         </div>
         <div className={styles.pesoMaximo}>
           <input
-            placeholder="Peso maximo (kg)"
+            placeholder="Max weight (kg)"
             name="pesoMax"
             value={form.pesoMax}
             onChange={(e) => handleChange(e)}
@@ -210,12 +211,12 @@ const CreateDog = () => {
             }}
           />
           <p className={styles.errorPesoMax}>
-            {form.pesoMax ? errors.pesoMax : "campo requerido"}
+            {form.pesoMax ? errors.pesoMax : "required field"}
           </p>
         </div>
         <div className={styles.alturaMinima}>
           <input
-            placeholder="Altura minima (cm)"
+            placeholder="Min height (cm)"
             name="alturaMin"
             value={form.alturaMin}
             onChange={(e) => handleChange(e)}
@@ -228,12 +229,12 @@ const CreateDog = () => {
             }}
           />
           <p className={styles.errorAlturaMin}>
-            {form.alturaMin ? errors.alturaMin : "campo requerido"}
+            {form.alturaMin ? errors.alturaMin : "required field"}
           </p>
         </div>
         <div className={styles.alturaMaxima}>
           <input
-            placeholder="Altura maxima(cm)"
+            placeholder="Max height(cm)"
             name="alturaMax"
             value={form.alturaMax}
             onChange={(e) => handleChange(e)}
@@ -246,12 +247,12 @@ const CreateDog = () => {
             }}
           />
           <p className={styles.errorAlturaMax}>
-            {form.alturaMax ? errors.alturaMax : "campo requerido"}
+            {form.alturaMax ? errors.alturaMax : "required field"}
           </p>
         </div>
         <div className={styles.lifeSpan}>
           <input
-            placeholder="Esperanza de vida (años)"
+            placeholder="Life span (años)"
             name="lifeSpan"
             value={form.lifeSpan}
             onChange={(e) => handleChange(e)}
@@ -262,11 +263,11 @@ const CreateDog = () => {
             }}
           />
           <p className={styles.errorLifeSpan}>
-            {form.lifeSpan ? errors.lifeSpan : "campo requerido"}
+            {form.lifeSpan ? errors.lifeSpan : "required field"}
           </p>
         </div>
-        <button className={styles.botonTemperamentos} onClick={(e) => handlePopUp(e)} >Desplegar temperamentos</button>
-        <input className={styles.boton} type="submit" name="boton" />
+        <button className={styles.botonTemperamentos} onClick={(e) => handlePopUp(e)} >Show temperaments</button>
+        <input className={styles.boton} type="submit" name="boton" value="Create"/>
       </form>
     </div>
   );

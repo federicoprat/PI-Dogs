@@ -84,7 +84,7 @@ const Home = () => {
       <div className={styles.fotosContainer}>
         <Boton
           name={ACTIONS.PREVIOUS_PAGE}
-          description="Anterior"
+          description="<<"
           className="anterior"
           disabled={page <= 0}
         />
@@ -92,7 +92,7 @@ const Home = () => {
           {!loading && <Paginado page={page} pages={pages} />}
         </div>
         {error ? (
-          <div>HUBO UN ERROR</div>
+          <div>Something went wrong</div>
         ) : (
           <Fotos className="hola">
             {loading ? (
@@ -137,7 +137,7 @@ const Home = () => {
         )}
         <Boton
           name={ACTIONS.NEXT_PAGE}
-          description="Siguiente"
+          description=">>"
           className="siguiente"
           disabled={page >= Math.floor(dogs.length) / 8 - 1}
         />

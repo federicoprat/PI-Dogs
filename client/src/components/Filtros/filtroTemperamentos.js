@@ -20,7 +20,7 @@ const FiltroTemperamento = ({
 
   return (
     <>
-    <p className={styles.p}>por temperamento</p>
+    <p className={styles.p}>By temperaments</p>
     <select
       className={styles.select}
       value={selectedTemperament}

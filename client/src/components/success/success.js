@@ -6,8 +6,8 @@ const Success = () => {
 
   return <div className={styles.background}>
       <div className={styles.fotosContainer}>
-        <p className={styles.exito}>PERRO CREADO CON EXITO </p>
-      <button onClick={() => navigate("/home")} className={styles.boton}>VOLVER A HOME</button>
+        <p className={styles.exito}>Dog Created</p>
+      <button onClick={() => navigate("/home")} className={styles.boton}>GO BACK HOME</button>
       </div>
   </div>;
 };

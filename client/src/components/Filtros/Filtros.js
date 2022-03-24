@@ -4,7 +4,7 @@ const Filtros = ({children}) => {
  
   return (
     <div className={styles.container} >
-      <p className={styles.p} >FILTROS:</p>
+      <p className={styles.p} >FILTER:</p>
       {children}
     </div>
   );

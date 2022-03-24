@@ -3,15 +3,15 @@ import styles from "./filtroCreados.module.css";
 const FiltroCreados = ({state, handleChange}) => {
   return (
     <>
-    <p className={styles.p}>por creados</p>
+    <p className={styles.p}>By creation</p>
     <select
       className={styles.select}
       value={state}
       onChange={(e) => handleChange(e.target.value)}
     >
-      <option value={'todos'}>Todos</option>
-      <option value={'creados'}>Solo Creados</option>
-      <option value={'api'}>Solo de la API</option>
+      <option value={'todos'}>All</option>
+      <option value={'creados'}>Only Created</option>
+      <option value={'api'}>Only from API</option>
     </select>
     </>
   );

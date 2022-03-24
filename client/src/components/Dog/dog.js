@@ -40,20 +40,20 @@ const Dog = () => {
           <DogBackground />
           <div className={styles.container}>
             {dog.length ? dog.map(
-              ({ name, image, height, weight, temperament, lifeSpan }) => {
+              ({ name, image, height, weight, temperament, life_span }) => {
                 return (
                   <div key={name} className={styles.dog}>
                     <img src={image} className={styles.img} alt={name} />
                     <div className={styles.containerDatos}>
-                      <div>Altura: {height} cm</div>
-                      <div>Peso: {weight} Kg</div>
-                      <div>Temperamento: {temperament.toString().replaceAll(',', ', ')}</div>
-                      <div>Años de vida: {lifeSpan}</div>
+                      <div>Height: {height} cm</div>
+                      <div>Weight: {weight} Kg</div>
+                      <div>Temperaments: {temperament.toString().replaceAll(',', ', ')}</div>
+                      <div>Life span: {life_span}</div>
                     </div>
                   </div>
                 );
               }
-            ) : <div style={{fontSize: '50px', color: 'rgb(60, 60, 60)'}}> NO HAY RESULTADOS </div>}
+            ) : <div style={{fontSize: '50px', color: 'rgb(60, 60, 60)'}}> NO RESULTS </div>}
           </div>
         </div>
       )}

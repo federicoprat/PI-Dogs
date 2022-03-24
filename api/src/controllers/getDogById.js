@@ -1,13 +1,8 @@
-/* 
-Los campos mostrados en la ruta principal para cada raza (imagen, nombre y temperamento)
-[ ] Altura
-[ ] Peso
-[ ] Años de vida
- */
+require('dotenv').config();
 
 const {CONFIG} = require('./configuration')
 const axios = require('axios')
-const API_KEY = '146e850c-31e1-4a41-9f72-38fd5433bc57'
+const {API_KEY} = process.env
 
 exports.getDogById = async (id) => {
     try {
