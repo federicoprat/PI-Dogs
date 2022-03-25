@@ -9,5 +9,5 @@ exports.temperaments = async (req, res) => {
     res.status(500).send("something gone wrong", error);
   }
   const temperamentsDB = await Temperament.findAll();
-  res.json(temperamentsDB);
+  return res.json(temperamentsDB);
 };

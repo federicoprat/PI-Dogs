@@ -19,7 +19,7 @@ exports.createDog = async (req, res) => {
     lifeSpan,
     temperamento,
   } = req.body;
-  const imagenes = ['imagenMuestra1', 'imagenMuestra2', 'imagenMuestra3']
+  const imagenes = ["imagenMuestra1", "imagenMuestra2", "imagenMuestra3"];
 
   const { Dog } = conn.models;
   try {
@@ -30,11 +30,11 @@ exports.createDog = async (req, res) => {
       weightMax: pesoMax,
       lifeSpan,
       image: imagenes[Math.floor(Math.random() * imagenes.length)],
-      created: true
+      created: true,
     });
     await dog.addTemperaments(temperamento);
-    res.json(dog)
+    return res.json(dog);
   } catch (error) {
-    res.status(500).send("algo malio sal");
+    return res.status(500).send("algo malio sal");
   }
 };

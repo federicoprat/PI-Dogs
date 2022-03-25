@@ -41,6 +41,6 @@ exports.dogById = async (req, res) => {
     const infoTotal = [...infoNecesaria]
     return res.json(infoTotal);
   } catch (error) {
-    res.status(500).send("algo salio mal", error);
+    return res.status(500).send("algo salio mal", error);
   }
 };
