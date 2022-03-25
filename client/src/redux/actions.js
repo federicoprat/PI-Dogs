@@ -1,3 +1,4 @@
+import axios from "axios";
 export const ACTIONS = {
   ADD_RACES: "addRaces",
   NEXT_PAGE: "nextPage",
@@ -17,15 +18,13 @@ export function addRaces(
   return async function (dispatch) {
     let json;
     if (!search) {
-      json = await fetch(
-        `http://localhost:3001/dogs?orderBy=${orderBy}&ascOrDesc=${ascOrDesc}`
-      );
+      json = await axios.get(`/dogs?orderBy=${orderBy}&ascOrDesc=${ascOrDesc}`);
     } else {
-      json = await fetch(
-        `http://localhost:3001/dogs?name=${search}&orderBy=${orderBy}&ascOrDesc=${ascOrDesc}`
+      json = await axios.get(
+        `/dogs?name=${search}&orderBy=${orderBy}&ascOrDesc=${ascOrDesc}`
       );
     }
-    const data = await json.json();
+    const { data } = await json;
     if (filter === "None") {
       if (origen === "todos")
         dispatch({
@@ -121,11 +120,11 @@ export function turnPage(arg) {
 
 export function getDogById({ id }) {
   return async function (dispatch) {
-    const data = await fetch(`http://localhost:3001/dogs/${id}`);
-    const json = await data.json();
+    const json = await axios.get(`/dogs/${id}`);
+    const { data } = await json;
     dispatch({
       type: ACTIONS.DOG_BY_ID,
-      payload: json,
+      payload: data,
     });
   };
 }
@@ -139,11 +138,11 @@ export function goToPage(page) {
 
 export function getTemperaments() {
   return async function (dispatch) {
-    const data = await fetch("http://localhost:3001/temperament");
-    const json = await data.json();
+    const json = await axios.get("/temperament");
+    const { data } = await json;
     dispatch({
       type: ACTIONS.ADD_TEMPERAMENTS,
-      payload: json,
+      payload: data,
     });
   };
 }
