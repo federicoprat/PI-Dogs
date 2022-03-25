@@ -47,7 +47,7 @@ const Dog = () => {
                     <div className={styles.containerDatos}>
                       <div>Height: {height} cm</div>
                       <div>Weight: {weight} Kg</div>
-                      <div>Temperaments: {temperament.toString().replaceAll(',', ', ')}</div>
+                      <div>Temperaments: {temperament ? temperament.toString().replaceAll(',', ', ') : "No Data"}</div>
                       <div>Life span: {life_span}</div>
                     </div>
                   </div>
