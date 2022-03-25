@@ -1,6 +1,6 @@
 const {
   alfabeticamente,
-} = require("../../../client/src/components/Utilidades/alfabeticamente");
+} = require("./alfabeticamente");
 const { getAllDogs } = require("../controllers/getAllDogs");
 const { conn } = require("../db");
 
