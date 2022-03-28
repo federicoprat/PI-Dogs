@@ -134,7 +134,7 @@ const CreateDog = () => {
       temperamentosData.length > 0
     ) {
       try {
-        const postRequest = await axios.post("http://localhost:3001/dog", {
+        const postRequest = await axios.post("/dog", {
           name: form.name.toLowerCase(),
           alturaMin: form.alturaMin,
           alturaMax: form.alturaMax,
