@@ -109,10 +109,10 @@ const CreateDog = () => {
     e.preventDefault();
     setPopUp(true);
   }
+  const temperamentosData = [];
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const temperamentosData = [];
     checked.map((elemento, index) => {
       if (elemento) return temperamentosData.push(index + 1);
       else return null;
@@ -152,7 +152,8 @@ const CreateDog = () => {
         console.log(error);
       }
     } else {
-      alert("There are fields with errors");
+      if (temperamentosData.length > 3) alert("Only 1 to 3 temperaments allowed")
+      else alert("There are fields with errors");
     }
   }
 
@@ -268,6 +269,7 @@ const CreateDog = () => {
           </p>
         </div>
         <button
+          style={{boxShadow: checked.includes(true) ? null : "0 0 20px 0 rgb(236, 16, 16)"}}
           className={styles.botonTemperamentos}
           onClick={(e) => handlePopUp(e)}
         >
