@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import PopUp from "../Temperamentos/popUp";
 import { useDispatch, useSelector } from "react-redux";
 import { getTemperaments } from "../../redux/actions";
+import axios from "axios";
 
 const CreateDog = () => {
   const initialStateForm = {
@@ -25,22 +26,23 @@ const CreateDog = () => {
   };
   const [form, setForm] = useState(initialStateForm);
   const [errors, setErrors] = useState(initialStateError);
-  const [popUp, setPopUp] = useState(false)
+  const [popUp, setPopUp] = useState(false);
   const inicio = useRef(true);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const temperamentos = useSelector((state) => state.temperaments);
-  const [checked, setChecked] = useState(
-    new Array(124).fill(false)
-  );
+  const [checked, setChecked] = useState(new Array(124).fill(false));
 
-  const validateNumber = useCallback((name) => {
-    if (!/^[0-9]*$/.test(form[name])) {
-      setErrors((prev) => ({ ...prev, [name]: "Solo se permiten numeros" }));
-    } else {
-      setErrors((prev) => ({ ...prev, [name]: "" }));
-    }
-  }, [form])
+  const validateNumber = useCallback(
+    (name) => {
+      if (!/^[0-9]*$/.test(form[name])) {
+        setErrors((prev) => ({ ...prev, [name]: "Solo se permiten numeros" }));
+      } else {
+        setErrors((prev) => ({ ...prev, [name]: "" }));
+      }
+    },
+    [form]
+  );
 
   const validateName = useCallback(() => {
     if (!/^[A-Za-z]+$/.test(form.name)) {
@@ -51,8 +53,7 @@ const CreateDog = () => {
     } else {
       setErrors((prev) => ({ ...prev, name: "" }));
     }
-  }, [form.name])
-
+  }, [form.name]);
 
   useEffect(() => {
     dispatch(getTemperaments());
@@ -104,18 +105,18 @@ const CreateDog = () => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  function handlePopUp (e) {
-    e.preventDefault()
-    setPopUp(true)
+  function handlePopUp(e) {
+    e.preventDefault();
+    setPopUp(true);
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const temperamentosData = []
+    const temperamentosData = [];
     checked.map((elemento, index) => {
-      if (elemento) return temperamentosData.push(index+1)
-      else return null
-    })
+      if (elemento) return temperamentosData.push(index + 1);
+      else return null;
+    });
     if (
       !errors.pesoMin &&
       !errors.pesoMax &&
@@ -128,30 +129,24 @@ const CreateDog = () => {
       form.alturaMin &&
       form.alturaMax &&
       form.lifeSpan &&
-      form.name && temperamentosData.length <= 3
-      && temperamentosData.length > 0
+      form.name &&
+      temperamentosData.length <= 3 &&
+      temperamentosData.length > 0
     ) {
       try {
-        const postRequest = await fetch("http://localhost:3001/dog", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: form.name.toLowerCase(),
-            alturaMin: form.alturaMin,
-            alturaMax: form.alturaMax,
-            pesoMin: form.pesoMin,
-            pesoMax: form.pesoMax,
-            lifeSpan: form.lifeSpan,
-            temperamento: temperamentosData
-          }),
+        const postRequest = await axios.post("http://localhost:3001/dog", {
+          name: form.name.toLowerCase(),
+          alturaMin: form.alturaMin,
+          alturaMax: form.alturaMax,
+          pesoMin: form.pesoMin,
+          pesoMax: form.pesoMax,
+          lifeSpan: form.lifeSpan,
+          temperamento: temperamentosData,
         });
         if (postRequest.status === 200) {
-          navigate("/success")
-        }
-        else if (postRequest.status === 500) {
-          alert("something went wrong..")
+          navigate("/success");
+        } else if (postRequest.status === 500) {
+          alert("something went wrong..");
         }
       } catch (error) {
         console.log(error);
@@ -163,7 +158,13 @@ const CreateDog = () => {
 
   return (
     <div className={styles.background}>
-      <PopUp render={popUp} setPopUp={setPopUp} temperamentos={temperamentos} checked={checked} setChecked={setChecked} />
+      <PopUp
+        render={popUp}
+        setPopUp={setPopUp}
+        temperamentos={temperamentos}
+        checked={checked}
+        setChecked={setChecked}
+      />
       <Header descripcion="Create a dog" searchbar={false} />
       <form className={styles.fotosContainer} onSubmit={(e) => handleSubmit(e)}>
         <div className={styles.name}>
@@ -266,8 +267,18 @@ const CreateDog = () => {
             {form.lifeSpan ? errors.lifeSpan : "required field"}
           </p>
         </div>
-        <button className={styles.botonTemperamentos} onClick={(e) => handlePopUp(e)} >Show temperaments</button>
-        <input className={styles.boton} type="submit" name="boton" value="Create"/>
+        <button
+          className={styles.botonTemperamentos}
+          onClick={(e) => handlePopUp(e)}
+        >
+          Show temperaments
+        </button>
+        <input
+          className={styles.boton}
+          type="submit"
+          name="boton"
+          value="Create"
+        />
       </form>
     </div>
   );
