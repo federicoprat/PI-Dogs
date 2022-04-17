@@ -1,8 +1,8 @@
 # Dogs Database
 
-![startingLogo](AppPics/Dogs2.jpg)
+![startingLogo](AppPics/Dogs2.png)
 
-![Home](AppPics/Dogs.jpg)
+![Home](AppPics/Dogs.png)
 
 ### This app consists of a front-end deployed on Vercel, the back-end is the API that gives the front-end all the information to display. It is deployed on heroku along with the postgreSQL database. I used sequelize to connect both.<br>
 ### It has a controlled form to create your own dog, it uses reg expressions, no form library used. It is validated in the database as well. It lets you choose 3 temperaments from all the available ones. <br>
