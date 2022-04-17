@@ -1,3 +1,4 @@
+### LinkedIn: https://www.linkedin.com/in/fred-prat/
 # Dogs Database
 
 ![startingLogo](AppPics/Dogs2.png)
